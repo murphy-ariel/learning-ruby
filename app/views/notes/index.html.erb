@@ -1,0 +1,24 @@
+<h1>List of Things to Do</h1>
+
+<strong>Pile it on!</strong>
+
+<p>
+ 
+<table>
+  <tr>
+    <th>Due Date</th>
+    <th>Text</th>
+  </tr>
+ 
+  <% @notes.each do |note| %>
+    <tr>
+      <td><%= note.title %></td>
+      <td><%= note.text %></td>
+      <td><%= link_to 'Show', type_note_path(note.id) %></td>
+      <td><%= link_to 'Edit', edit_type_note_path(note.id) %></td>
+      <td><%= link_to 'Mark Done', type_note_path(note.id),
+              method: :delete,
+              data: { confirm: 'I promise I\'m not lying. I\'m really done.' } %></td>
+    </tr>
+  <% end %>
+</table>

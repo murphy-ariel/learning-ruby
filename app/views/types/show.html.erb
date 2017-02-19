@@ -1,0 +1,13 @@
+<h2><%= @type.name %></h2>
+<%= link_to 'Back', types_path %>
+
+<% @type.notes.each do |note| %>
+	<p>
+  		<%= note.title %><br>
+  		<%= note.text %> <br>
+  		<%= link_to 'Edit', edit_type_note_path(note.id) %> 
+  	</p>
+<% end %>
+<%= link_to 'Add another Note', new_type_note_path(@type) %><br>
+
+<small><%= link_to 'Edit Type Name', edit_type_path(@type) %> </small>
