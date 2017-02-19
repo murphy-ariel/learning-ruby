@@ -10,6 +10,9 @@ class NotesController < ApplicationController
 
 	def new
 		@note=Note.new
+		def form
+			@note
+		end
   end
 
   def edit
