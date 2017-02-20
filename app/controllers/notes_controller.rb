@@ -9,10 +9,7 @@ class NotesController < ApplicationController
   end
 
 	def new
-		@note=Note.new
-		def form
-			@note
-		end
+		@note = Note.new(params[:note])
   end
 
   def edit
@@ -20,9 +17,9 @@ class NotesController < ApplicationController
 	end
 
   def create
-  	@type=Type.find(params[:type_id])
- 		@note = @type.notes.create(note_params)
- 		redirect_to type_path(@type)
+  	@note = Note.new(note_params)
+ 		@note.save
+ 		redirect_to type_notes_path(Type.find(params[:type_id]))
 	end
 
 	def update
@@ -45,7 +42,7 @@ class NotesController < ApplicationController
 	private
 
 	def note_params
-		params.require(:note).permit(:title, :text)
+		params.require(:note).permit(:title, :text, :note_id, :type_id)
 	end
 
 

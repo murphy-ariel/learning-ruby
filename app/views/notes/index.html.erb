@@ -1,17 +1,14 @@
-<h1>List of Things to Do</h1>
+<h1><%= Type.find(params[:type_id]).name %></h1>
 
-<strong>Pile it on!</strong>
+<strong>hoorah</strong>
 
 <p>
  
 <table>
-  <tr>
-    <th>Due Date</th>
-    <th>Text</th>
-  </tr>
- 
   <% @notes.each do |note| %>
     <tr>
+      <td>I'm trying here.</td>
+      <td><%= note.type_id %></td>
       <td><%= note.title %></td>
       <td><%= note.text %></td>
       <td><%= link_to 'Show', type_note_path(note.id) %></td>
@@ -19,6 +16,8 @@
       <td><%= link_to 'Mark Done', type_note_path(note.id),
               method: :delete,
               data: { confirm: 'I promise I\'m not lying. I\'m really done.' } %></td>
-    </tr>
+        </tr>
   <% end %>
 </table>
+<p>
+ <%= link_to 'Add another Note', new_type_note_path(Type.find(params[:type_id]).id)%>

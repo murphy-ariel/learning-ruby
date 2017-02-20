@@ -1,5 +1,22 @@
 <h1>New To Do Item</h1>
  
-<%= render 'form' %>
+
+<%= form_for [:type,@note] do |f| %>
+	<!--= Type.find(params[:id]).type_id %-->
+	<p>
+	    <%= f.label :title %><br>
+	    <%= f.text_field :title %>
+	  </p>
+	 
+  	<p>
+	    <%= f.label :text %><br>
+	    <%= f.text_area :text %>
+  	</p>
+	 
+  	<p>
+	    <%= f.submit %>
+  	</p>
+
+<% end %>
  
 <%= link_to 'Back', types_path %>
