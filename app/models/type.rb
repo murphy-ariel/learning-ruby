@@ -1,11 +1,4 @@
 class Type < ApplicationRecord
-	has_many :notes
+	has_many :notes, dependent: :destroy
 
-	
-	def notes
-  	Note.all
-  end
-  def note
-  	Note.new(params[:note_id])
- 	end
 end

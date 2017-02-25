@@ -7,5 +7,5 @@
   <strong>Text:</strong>
   <%= @note.text %>
 </p>
-<%= link_to 'Edit', edit_type_note_path(@note) %> |
-<%= link_to 'Back', type_note_path %>
+<%= link_to 'Edit', edit_type_note_path(params[:type_id],@note) %> |
+<%= link_to 'Back', type_notes_path(params[:type_id]) %>

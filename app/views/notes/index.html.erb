@@ -1,23 +1,25 @@
 <h1><%= Type.find(params[:type_id]).name %></h1>
-
-<strong>hoorah</strong>
-
+<small><%= link_to 'Edit Type Name', edit_type_path(@type)%></small> <br>
+<small><%= link_to 'Delete this Category', type_path(@type),
+                  method: :delete,
+                  data: { confirm: 'Is it really the end of the semester and you have no more work to do in this category of things?' } %></small>
 <p>
  
 <table>
-  <% @notes.each do |note| %>
+  <% @type.notes.each do |note| %>
     <tr>
-      <td>I'm trying here.</td>
-      <td><%= note.type_id %></td>
-      <td><%= note.title %></td>
+      <td><strong><%= note.title %></strong></td>
+      <td> ------- </td>
       <td><%= note.text %></td>
-      <td><%= link_to 'Show', type_note_path(note.id) %></td>
-      <td><%= link_to 'Edit', edit_type_note_path(note.id) %></td>
-      <td><%= link_to 'Mark Done', type_note_path(note.id),
+      <td><%= link_to 'Show', type_note_path(@type, note) %></td>
+      <td><%= link_to 'Edit', edit_type_note_path(@type, note) %></td>
+      <td><%= link_to 'Mark Done', type_note_path(@type, note),
               method: :delete,
               data: { confirm: 'I promise I\'m not lying. I\'m really done.' } %></td>
         </tr>
   <% end %>
 </table>
-<p>
- <%= link_to 'Add another Note', new_type_note_path(Type.find(params[:type_id]).id)%>
+<br>
+<%= link_to 'Add another Note', new_type_note_path(Type.find(params[:type_id])) %>
+<br><br>
+<%= link_to 'Back', types_path %>

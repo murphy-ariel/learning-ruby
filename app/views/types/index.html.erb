@@ -1,17 +1,28 @@
-<h1>List of Things to Do</h1>
+<h2>the undending hell of your own creation</h2>
 
-<strong>Pile it on!</strong>
-<%= link_to 'Another Type', new_type_path %>
-<p>
+<p><%= link_to 'i am a glutton for punishment- give me MORE categories of things to do', new_type_path %></p>
  
 <table>
   <% @types.each do |type| %>
     <tr> 
-      <td><%= type.name %></td>
-      <td><%= link_to 'Show', type_path(type) %></td>
-      <td><%= link_to 'Mark Done', type_path(type),
-              method: :delete,
-              data: { confirm: 'I promise I\'m not lying. I\'m really done.' } %></td>
+      <td><strong><%= link_to type.name, type_notes_path(type) %></strong></td>
+      <td>.........................................</td>
+      <td><%= link_to 'pile it on', new_type_note_path(type) %></td>
     </tr>
+    <tr>
+      	<table>
+		  <% type.notes.each do |note| %>
+		    <tr>
+		      <td>------------<%= note.title %></td>
+		      <td>&nbsp;</td>
+		      <td><%= note.text %></td>
+		      <td><small><%= link_to 'fix me', edit_type_note_path(type, note) %></small></td>
+		      <td><small><%= link_to 'complete', type_note_path(type, note),
+		              method: :delete,
+		              data: { confirm: 'I promise I\'m not lying. I\'m really done.' } %></small></td>
+		        </tr>
+		  <% end %>
+		</table>
+	</tr>
   <% end %>
 </table>

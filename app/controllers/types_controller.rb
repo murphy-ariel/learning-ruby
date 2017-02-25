@@ -6,6 +6,8 @@ class TypesController < ApplicationController
 
 	def show
     @type = Type.find(params[:id])
+    @notes=@type.notes
+    redirect_to type_notes_path(@type)
   end
 
 	def new

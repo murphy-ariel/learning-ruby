@@ -1,11 +1,12 @@
 class NotesController < ApplicationController
 
 	def index
-    @notes=Note.all
+		@type=Type.find(params[:type_id])
+		#binding.pry
   end
 
 	def show
-    @note = Note.find(params[:note_id])
+    @note = Note.find(params[:id])
   end
 
 	def new
@@ -13,30 +14,29 @@ class NotesController < ApplicationController
   end
 
   def edit
-  	@note = Note.find(params[:note_id])
+  	@note = Note.find(params[:id])
+  	#binding.pry
 	end
 
   def create
   	@note = Note.new(note_params)
+  	@note.type_id = params[:type_id]
  		@note.save
  		redirect_to type_notes_path(Type.find(params[:type_id]))
 	end
 
 	def update
-  	@note = Note.find(params[:note_id])
- 	
-  	if @note.update(note_params)
-	    redirect_to @note
-	  else
-    	render 'edit'
-  	end
+  	@note = Note.find(params[:id])	
+  	#binding.pry
+  	@note.update(note_params)
+  	redirect_to type_notes_path(Type.find(@note.type_id))
 	end
 
 	def destroy
-  	@note = Note.find(params[:note_id])
-  	@note.destroy
-	 
-	  redirect_to types_path
+  	@note = Note.find(params[:id])
+  	temp=Type.find(@note.type_id)
+  	@note.delete
+	  redirect_to root_path
 	end
 
 	private
